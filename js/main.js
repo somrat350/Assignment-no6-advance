@@ -178,7 +178,7 @@ function showSmallCart() {
 }
 
 
-let cart = [];
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 
 // Products cart count
@@ -194,6 +194,7 @@ const cartCountFun = () => {
 const addToCart = id => {
   let plant = allProducts.find(plant=> plant.id == id);
   cart.push(plant);
+  localStorage.setItem("cart", JSON.stringify(cart));
   showCart();
   alert(`${plant.name} has been added to the cart.`);
 }
@@ -210,7 +211,7 @@ const showCart = () => {
 
     cartDiv.innerHTML = "";
 
-    cart.forEach((plant,index) => {
+    cart.forEach((plant) => {
       
 
       cartDiv.innerHTML += `
@@ -221,7 +222,7 @@ const showCart = () => {
               ><i class="fa-solid fa-bangladeshi-taka-sign"></i>${plant.price}</span
             >
           </div>
-          <i onclick="removeFromCart(${index})" class="fa-solid fa-xmark text-gray-500 text-sm cursor-pointer"></i>
+          <i onclick="removeFromCart(${plant.id})" class="fa-solid fa-xmark text-gray-500 text-sm cursor-pointer"></i>
         </div>
     `
     })
@@ -236,10 +237,14 @@ const showCart = () => {
 
 }
 
+showCart()
+
 
 // Products remove from cart
 
-const removeFromCart = index => {
+const removeFromCart = id => {
+  let index = cart.findIndex(item=>item.id == id)
   cart.splice(index,1)
+  localStorage.setItem("cart", JSON.stringify(cart));
   showCart();
 }
