@@ -90,7 +90,7 @@ const showProducts = datas => {
     <div class="bg-white p-2 rounded-lg grid gap-2">
     <div class="">
     <img class="rounded-lg h-56 w-full object-cover object-center"
-    src=""
+    src="${data.image}"
     alt=""
     />
     </div>  
