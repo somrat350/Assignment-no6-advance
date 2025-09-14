@@ -65,7 +65,7 @@ const loadAllProducts = (e = "") => {
     .then((res) => res.json())
     .then((datas) => {
       allProducts = datas.plants;
-      showProducts(datas.plants);
+      showProducts(allProducts);
     });
 
   if (e.tagName == "SPAN") {
@@ -89,7 +89,7 @@ const showProducts = datas => {
     productsDiv.innerHTML += `
     <div class="bg-white p-2 rounded-lg grid gap-2">
     <div class="">
-    <img class="rounded-lg h-56 w-full object-cover object-center"
+    <img loading="lazy" class="rounded-lg h-56 w-full object-cover object-center"
     src="${data.image}"
     alt=""
     />
